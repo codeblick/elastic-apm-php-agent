@@ -16,7 +16,7 @@ The recommended way to install the agent is through [Composer](http://getcompose
 Run the following composer command
 
 ```bash
-php composer.phar require codeblick/elastic-apm-php-agent:dev-master
+php composer.phar require codeblick/elastic-apm-php-agent
 ```
 
 After installing, you need to require Composer's autoloader:
