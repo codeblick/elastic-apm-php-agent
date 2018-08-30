@@ -177,27 +177,27 @@ class EventBean
         $http_or_https = isset($_SERVER['HTTPS']) ? 'https' : 'http';
         
         // Build Context Stub
-        $SERVER_PROTOCOL = $_SERVER['SERVER_PROTOCOL'] ?? '';
+        $SERVER_PROTOCOL = $_SERVER['SERVER_PROTOCOL'] ? $_SERVER['SERVER_PROTOCOL'] : '';
         $context         = [
             'request' => [
                 'http_version' => substr($SERVER_PROTOCOL, strpos($SERVER_PROTOCOL, '/')),
-                'method'       => $_SERVER['REQUEST_METHOD'] ?? 'cli',
+                'method'       => $_SERVER['REQUEST_METHOD'] ? $_SERVER['REQUEST_METHOD'] : 'cli',
                 'socket'       => [
-                    'remote_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+                    'remote_address' => $_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : '',
                     'encrypted'      => isset($_SERVER['HTTPS'])
                 ],
                 'response' => $this->contexts['response'],
                 'url'          => [
                     'protocol' => $http_or_https,
-                    'hostname' => $_SERVER['SERVER_NAME'] ?? '',
-                    'port'     => $_SERVER['SERVER_PORT'] ?? '',
-                    'pathname' => $_SERVER['SCRIPT_NAME'] ?? '',
-                    'search'   => '?' . (($_SERVER['QUERY_STRING'] ?? '') ?? ''),
+                    'hostname' => $_SERVER['SERVER_NAME'] ? $_SERVER['SERVER_NAME'] : '',
+                    'port'     => $_SERVER['SERVER_PORT'] ? $_SERVER['SERVER_PORT'] : '',
+                    'pathname' => $_SERVER['SCRIPT_NAME'] ? $_SERVER['SCRIPT_NAME'] : '',
+                    'search'   => '?' . (($_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : '') ? ($_SERVER['QUERY_STRING'] ? $_SERVER['QUERY_STRING'] : '') : ''),
                     'full' => $http_or_https . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
                 ],
                 'headers' => [
-                    'user-agent' => $headers['User-Agent'] ?? '',
-                    'cookie'     => $headers['Cookie'] ?? ''
+                    'user-agent' => $headers['User-Agent'] ? $headers['User-Agent'] : '',
+                    'cookie'     => $headers['Cookie'] ? $headers['Cookie'] : ''
                 ],
                 'env' => $_SERVER,
             ]

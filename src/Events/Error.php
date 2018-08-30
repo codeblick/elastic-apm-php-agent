@@ -66,7 +66,7 @@ class Error extends EventBean implements \JsonSerializable
 
         foreach ($this->throwable->getTrace() as $trace) {
             $item = [
-              'function' => $trace['function'] ?? '(closure)'
+              'function' => $trace['function'] ? $trace['function'] : '(closure)'
             ];
 
             if (isset($trace['line']) === true) {
